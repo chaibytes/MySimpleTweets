@@ -61,14 +61,14 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         app:srcCompat="@drawable/ic_launcher"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp"
         android:id="@+id/ivProfileImage"
         android:contentDescription="@string/img_ProfilePic"
-        android:layout_above="@+id/etComposeTweet"
+        android:layout_below="@+id/btCancel"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="43dp" />
+        android:layout_marginTop="30dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -77,7 +77,8 @@
         android:ems="10"
         android:id="@+id/etComposeTweet"
         tools:hint="@string/compose_tweet_text"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="19dp"
+        android:layout_below="@+id/tvUserHandle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 </RelativeLayout>
