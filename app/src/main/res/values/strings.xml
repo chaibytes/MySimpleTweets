@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SimpleTweets</string>
+    <string name="login_label">Connect to Twitter</string>
+    <string name="title_activity_timeline">Home Timeline</string>
+    <string name="text_body">Description of a tweet.</string>
+    <string name="user_name">Tweet User</string>
+    <string name="tweet_body">Body of the tweet.</string>
+    <string name="compose">Compose</string>
+    <string name="compose_tweet">Compose Tweet</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_Tweet">Tweet</string>
+    <string name="img_ProfilePic" />
+    <string name="user_handle">UserHandle</string>
+    <string name="compose_tweet_text">Your tweet here...</string>
+
+</resources>
