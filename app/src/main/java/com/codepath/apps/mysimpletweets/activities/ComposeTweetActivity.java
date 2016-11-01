@@ -92,7 +92,7 @@ public class ComposeTweetActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                tvCount.setText(String.valueOf(s.length()));
+                tvCount.setText(String.valueOf(140 - s.length()));
                 if (s.length() > 140) {
                     tvCount.setTextColor(Color.RED);
                 }
