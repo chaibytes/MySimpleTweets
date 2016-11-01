@@ -14,5 +14,6 @@
     <string name="img_ProfilePic" />
     <string name="user_handle">UserHandle</string>
     <string name="compose_tweet_text">Your tweet here...</string>
+    <string name="char_count">0</string>
 
 </resources>

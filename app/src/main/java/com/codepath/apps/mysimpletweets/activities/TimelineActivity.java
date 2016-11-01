@@ -172,9 +172,9 @@ public class TimelineActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-            aTweets.clear();
+            Tweet tweet = data.getParcelableExtra("tweet");
+            tweets.add(0, tweet);
             aTweets.notifyDataSetChanged();
-            populateTimeline(0, 0);
         }
     }
 }
