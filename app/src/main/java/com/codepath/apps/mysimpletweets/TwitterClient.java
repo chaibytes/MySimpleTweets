@@ -8,6 +8,7 @@ import android.content.Context;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 /*
@@ -53,7 +54,27 @@ public class TwitterClient extends OAuthBaseClient {
         getClient().get(apiUrl, params, handler);
     }
 
+    // Get user timeline
+    public void getUserTimeLine(String screenName, long since_id, long max_id, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/user_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        // if ScreenName is not provided the it returns the current user's details
+        params.put("screen_name", screenName);
+        if (since_id != 0 && max_id != 0) {
+            // params.put("since_id", since_id);
+            params.put("max_id", max_id);
+        }
+        getClient().get(apiUrl, params, handler);
+    }
 
+    // Get user info
+    public void getUserInfo(String screenName, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("users/show.json");
+        RequestParams params = new RequestParams();
+        params.put("screen_name", screenName);
+        getClient().get(apiUrl, params, handler);
+    }
 	// GET account/verify_credentials
     public void getUserCredentials(AsyncHttpResponseHandler handler) {
         String apiUrl = getApiUrl("account/verify_credentials.json");
@@ -71,6 +92,19 @@ public class TwitterClient extends OAuthBaseClient {
         RequestParams params = new RequestParams();
         params.put("status", tweet);
         getClient().post(apiUrl, params, handler);
+    }
+
+    public void getMentionsTimeline(long since_id, long max_id, JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+
+        // Specify params
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        if (since_id != 0 && max_id != 0) {
+            //params.put("since_id", since_id);
+            params.put("max_id", max_id);
+        }
+        getClient().get(apiUrl, params, handler);
     }
 
 	/* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint

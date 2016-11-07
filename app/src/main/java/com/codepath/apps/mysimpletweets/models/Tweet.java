@@ -105,7 +105,7 @@ public class Tweet implements Parcelable {
         }
         String[] array = relativeDate.split(" ");
         // Only the numeric value + the first char
-        if (array[2].contains("ago")) {
+        if (array.length >= 3 && array[2].contains("ago")) {
             return (array[0] + array[1].substring(0, 1));
         }
         return relativeDate;

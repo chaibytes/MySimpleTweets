@@ -41,9 +41,11 @@
         </activity>
         <activity
             android:name=".activities.TimelineActivity"
-            android:label="@string/title_activity_timeline"></activity>
-        <activity android:name=".activities.ComposeTweetActivity"
-            android:label="@string/compose_tweet"></activity>
+            android:label="@string/title_activity_timeline" />
+        <activity
+            android:name=".activities.ComposeTweetActivity"
+            android:label="@string/compose_tweet" />
+        <activity android:name=".activities.ProfileActivity" />
     </application>
 
 </manifest>

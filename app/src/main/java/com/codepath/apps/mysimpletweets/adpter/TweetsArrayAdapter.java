@@ -23,6 +23,8 @@ import java.util.List;
 // to be displayed in the list
 public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
 
+    private ProfileImageClickListner listner;
+
     private static class ViewHolder {
         ImageView ivProfileImage;
         TextView tvUserName;
@@ -32,6 +34,10 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
     }
     public TweetsArrayAdapter(Context context, List<Tweet> tweets) {
         super(context, 0, tweets);
+        this.listner = null;
+    }
+    public void setCustomObjectListener(ProfileImageClickListner listener) {
+        this.listner = listener;
     }
 
     // Override and setup custom template
@@ -42,7 +48,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
     public View getView(int position, View convertView, ViewGroup parent) {
         // 1. Get the tweet
         Tweet tweet = getItem(position);
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
         // 2. Find or inflate the template
         if (convertView == null) {
             viewHolder = new ViewHolder();
@@ -57,7 +63,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
+        final String screenName = tweet.getUser().getScreenName();
         // 4. Populate data into the subviews
         viewHolder.tvUserName.setText(String.format("@%s", tweet.getUser().getScreenName()));
         viewHolder.tvBody.setText(tweet.getBody());
@@ -65,8 +71,21 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
         Picasso.with(getContext()).load(tweet.getUser().getProfileImageUrl()).into(viewHolder.ivProfileImage);
         viewHolder.tvCreatedAt.setText(tweet.getCreatedAt());
         viewHolder.tvScreenName.setText(tweet.getUser().getScreenName());
+
+        viewHolder.ivProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listner != null) {
+                    listner.onProfileImageClick(screenName);
+                }
+            }
+        });
         // 5. Return the view to be inserted into the list
         return convertView;
 
+    }
+
+    public interface ProfileImageClickListner {
+        public void onProfileImageClick(String screenName);
     }
 }

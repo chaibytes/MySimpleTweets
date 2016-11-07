@@ -17,6 +17,10 @@ public class User implements Parcelable {
     private String screenName;
     private String profileImageUrl;
 
+    private String tagline;
+    private int followersCount;
+    private int followingCount;
+
     public String getName() {
         return name;
     }
@@ -33,6 +37,19 @@ public class User implements Parcelable {
         return profileImageUrl;
     }
 
+
+    public String getTagline() {
+        return tagline;
+    }
+
+    public int getFollowersCount() {
+        return followersCount;
+    }
+
+    public int getFollowingCount() {
+        return followingCount;
+    }
+
     // deserialize the user from json ==> User
     public static User fromJSON(JSONObject jsonObject) {
         User u = new User();
@@ -42,6 +59,9 @@ public class User implements Parcelable {
             u.uid = jsonObject.getLong("id");
             u.screenName = jsonObject.getString("screen_name");
             u.profileImageUrl = jsonObject.getString("profile_image_url");
+            u.tagline = jsonObject.getString("description");
+            u.followersCount = jsonObject.getInt("followers_count");
+            u.followingCount = jsonObject.getInt("friends_count");
         } catch (JSONException e) {
             e.printStackTrace();
         }
