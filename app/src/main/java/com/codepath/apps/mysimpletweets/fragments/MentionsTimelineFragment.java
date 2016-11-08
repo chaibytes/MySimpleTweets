@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.TwitterClient;
+import com.codepath.apps.mysimpletweets.activities.TimelineActivity;
 import com.codepath.apps.mysimpletweets.functionality.EndlessScrollListener;
 import com.codepath.apps.mysimpletweets.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -45,6 +46,7 @@ public class MentionsTimelineFragment extends TweetsListFragments{
     // Send an API request to get the timeline json
     // Fill the listview by creating tweet objects from the json
     public void populateTimeline(long since_id, long max_id) {
+//        ((TimelineActivity)getActivity()).showProgressBar();
         client.getMentionsTimeline(since_id, max_id, new JsonHttpResponseHandler() {
             // Success
             @Override
@@ -58,6 +60,7 @@ public class MentionsTimelineFragment extends TweetsListFragments{
                 if (tweetArrayListarray.size() == 0) {
                     // Limit reached
                     scrollListener.limitReached();
+//                    ((TimelineActivity)getActivity()).hideProgressBar();
                 } else {
                     // Deserialize JSON
                     // Create Models and add them to the adapter
@@ -68,6 +71,7 @@ public class MentionsTimelineFragment extends TweetsListFragments{
                     final long maxID = getAdapter().getItem(getAdapter().getCount() - 1).getUid() - 1;
                     final long sinceID = getAdapter().getItem(0).getUid();
                     scrollListener.onLoadFinish(sinceID, maxID, getAdapter().getCount());
+//                    ((TimelineActivity)getActivity()).hideProgressBar();
                     if (getAdapter().getCount() <= COUNT) {
                         // API rate limit reached
                         handler.postDelayed(new Runnable() {

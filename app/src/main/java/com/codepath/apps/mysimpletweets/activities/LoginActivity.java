@@ -1,14 +1,25 @@
 package com.codepath.apps.mysimpletweets.activities;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
 import com.codepath.apps.mysimpletweets.R;
+import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.TwitterClient;
+import com.codepath.apps.mysimpletweets.fragments.NetworkAlertFragment;
+import com.codepath.apps.mysimpletweets.functionality.NetworkConnectivity;
 import com.codepath.oauth.OAuthLoginActionBarActivity;
+
+import java.io.IOException;
 
 // Where the user wil sign in to twitter
 public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
@@ -47,7 +58,14 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 	// Uses the client to initiate OAuth authorization
 	// This should be tied to a button used to login
 	public void loginToRest(View view) {
-		getClient().connect();
+		NetworkConnectivity nc = new NetworkConnectivity(getApplicationContext(), getSupportFragmentManager());
+        if (nc.isNetworkConnected()) {
+            getClient().connect();
+        } else {
+			Log.d("DEBUG", "No Network Connectivity");
+            nc.showAlertDialog();
+
+        }
 	}
 
 }
